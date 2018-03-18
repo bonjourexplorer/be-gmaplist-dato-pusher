@@ -1,0 +1,316 @@
+env:
+    node: true
+    mocha: true
+
+parserOptions:
+    ecmaVersion: 9
+    sourceType: script
+
+rules:
+
+    # Errors break builds and prevent tests from running, so on occasion,
+    # warn is used to allow tests/builds to run during development,
+    # even though it's an error.
+
+    # Possible Errors
+    no-await-in-loop: error
+    no-compare-neg-zero: error
+    no-cond-assign: error
+    no-console: warn # debugging happens
+    no-constant-condition: error
+    no-control-regex: off # too edge to care
+    no-debugger: warn # debugging happens
+    no-dupe-args: error
+    no-dupe-keys: error
+    no-duplicate-case: error
+    no-empty: error
+    no-empty-character-class: error
+    no-ex-assign: error
+    no-extra-boolean-cast: error
+    no-extra-parens:
+        - error
+        - all
+        - conditionalAssign: false
+          nestedBinaryExpressions: false
+          ignoreJSX: multi-line
+    no-extra-semi: error
+    no-func-assign: error
+    no-inner-declarations: off # excellent way to control scope/code-complexity
+    no-invalid-regexp: error
+    no-irregular-whitespace: error
+    no-obj-calls: error
+    no-prototype-builtins: warn # prototype-less objects are a thing
+    no-regex-spaces: error
+    no-sparse-arrays: off # fixed length arrays are a thing
+    no-template-curly-in-string: error
+    no-unexpected-multiline: error
+    no-unreachable: error
+    no-unsafe-finally: error
+    no-unsafe-negation: error
+    use-isnan: error
+    valid-jsdoc: off # in favor of docco
+    valid-typeof: error
+
+    # Best Practices
+    accessor-pairs: error
+    array-callback-return: error
+    block-scoped-var: error
+    class-methods-use-this: warn # disable in file if intentional
+    complexity: [ warn, 20 ]
+    consistent-return: error
+    curly: [ error, all ]
+    default-case: off # do not always make sense (i.e. which switches return)
+    dot-location: [ error, property ]
+    dot-notation: error
+    eqeqeq: error
+    guard-for-in: warn # just be careful and disable in file if intentional
+    no-alert: error
+    no-caller: error
+    no-case-declarations: error
+    no-div-regex: off # don't care
+    no-else-return: error
+    no-empty-function: error
+    no-empty-pattern: error # irrelevant since destructuring is disallowed
+    no-eq-null: error
+    no-eval: error
+    no-extend-native: error
+    no-extra-bind: error
+    no-extra-label: error
+    no-fallthrough: error # this just forces a comment explaining why
+    no-floating-decimal: error
+    no-global-assign: error
+    no-implicit-coercion: error
+    no-implicit-globals: error
+    no-implied-eval: error
+    no-invalid-this: off # flags too many legitimate uses
+    no-iterator: error
+    no-labels: error
+    no-lone-blocks: error
+    no-loop-func: error
+    no-magic-numbers: off # flags too many legitimate uses
+    no-multi-spaces: error
+    no-multi-str: error
+    no-new: error
+    no-new-func: error
+    no-new-wrappers: error # disable in file & explain if need a primitive ref
+    no-octal: error
+    no-octal-escape: error
+    no-param-reassign: error
+    no-proto: error
+    no-redeclare: error
+    no-restricted-properties: off # maybe use this in the future
+    no-return-assign: off # useful in memoization & setters
+    no-return-await: error
+    no-script-url: error
+    no-self-assign: error
+    no-self-compare: error
+    no-sequences: error
+    no-throw-literal: error
+    no-unmodified-loop-condition: error
+    no-unused-expressions: off # prevents expression chaining
+    no-unused-labels: error
+    no-useless-call: error
+    no-useless-concat: error
+    no-useless-escape: error
+    no-useless-return: error
+    no-void: error
+    no-warning-comments:
+        - warn
+        - terms:
+              - 'todo'
+              - 'fixme'
+              - 'xxx'
+          location: 'anywhere'
+    no-with: error
+    prefer-promise-reject-errors: error
+    radix: off # irrelevant in IE9+
+    require-await: error
+    vars-on-top: off # makes it unclear where vars come from and their scope
+    wrap-iife: [ error, outside ]
+    yoda: off
+        # - error
+        # - never
+        # - onlyEquality: true # would prefer inequality also
+
+    # Strict Mode
+    strict: off # implied
+
+    # Variables
+    init-declarations: off # init'ed and non-init'd are needed
+    no-catch-shadow: error
+    no-delete-var: error
+    no-label-var: error
+    no-restricted-globals: error
+    no-shadow: error
+    no-shadow-restricted-names: error
+    no-undef: error
+    no-undef-init: error
+    no-undefined: off # ecmascript 3 is too old to be a consideration
+    no-unused-vars:
+        - warn # mid-development unused vars shouldn't block the build
+        - args: none
+    no-use-before-define: off # hoisting helps make code more self-documenting,
+                              # and also creates a nice header/toc
+
+    # Node.js and CommonJS
+    callback-return: error
+    global-require: off # pass into an iife at the bottom of the module
+    handle-callback-err: error
+    no-mixed-requires: error
+    no-new-require: error
+    no-path-concat: error
+    no-process-env: error
+    no-process-exit: error
+    no-restricted-modules: off # maybe use this in the future
+    no-sync: error
+
+    # Stylistic Issues
+    array-bracket-spacing: [ error, always ]
+    block-spacing: error
+    brace-style: error
+    camelcase: off # use snake_case for benefit of non-native English speakers
+    capitalized-comments: off # usually, but not always, so...
+    comma-dangle:
+        - error
+        - arrays: always-multiline
+          objects: always-multiline
+          imports: always-multiline
+          exports: always-multiline
+          functions: always-multiline
+    comma-spacing: [ error, { before: false , after: true } ]
+    comma-style: [ error, last ]
+    computed-property-spacing: off # would prefer "always" unless var/literal
+    consistent-this: off # use `thisThing` where "Thing" is descriptive
+    eol-last: [ error, always ]
+    func-call-spacing: [ error, never ]
+    func-name-matching: off # not useful
+    func-names: error
+    func-style:
+        - error
+        - declaration
+        - allowArrowFunctions: false
+    id-blacklist: off # maybe use this in the future
+    id-length: off # legitimate 1 char & many char ids
+    id-match: off # maybe use this in the future
+    indent:
+        - error
+        - 4 # 2 is difficult for some eyes to read + 4 discourages deep nesting
+        - SwitchCase: 1
+    jsx-quotes: [ error, prefer-double ]
+    key-spacing:
+        - error
+        - beforeColon: false
+          afterColon: true
+    keyword-spacing:
+        - error
+        - before: true
+          after: true
+    line-comment-position: off # both are useful
+    linebreak-style: error
+    lines-around-comment: off # too troublesome during development
+    lines-around-directive:
+        - error
+        - before: never
+          after: always
+    max-depth: [ warn, { max: 4 } ]
+    max-len: [ error, 80 ]
+    max-lines: [ warn, 300 ]
+    max-nested-callbacks: [ warn, 3 ]
+    max-params: [ error, 3 ]
+    max-statements: [ warn, 15, { ignoreTopLevelFunctions: true } ]
+    max-statements-per-line: [ warn, { max: 1 } ]
+    multiline-ternary: off # multiline is more readable than single line
+    new-cap: off # coercion happens (e.g. Integer(number))
+    new-parens: off # does not reduce clarity to omit
+    newline-after-var: off # both make sense
+    newline-before-return: off # does not increase clarity
+    newline-per-chained-call: off  # let line length govern this
+    no-array-constructor: error
+    no-bitwise: warn # sometimes it's a good idea, disable in file if needed
+    no-continue: error
+    no-inline-comments: off # useful for short comments
+    no-lonely-if: error
+    no-mixed-operators: off
+    no-mixed-spaces-and-tabs: error
+    no-multi-assign: off # sometimes good to do
+    no-multiple-empty-lines:
+        - warn
+        - max: 3
+          maxBOF: 0
+          maxEOF: 1
+    no-negated-condition: off # sometimes it's clearer
+    no-nested-ternary: off # nested ternary is super readable and useful
+    no-new-object: error
+    no-plusplus: off # obviously
+    no-restricted-syntax: off # maybe use this in the future
+    no-tabs: error
+    no-ternary: off # obviously
+    no-trailing-spaces: error
+    no-underscore-dangle: off
+    no-unneeded-ternary: error
+    no-whitespace-before-property: error
+    nonblock-statement-body-position: off # irrelevant cause curly is set to all
+    object-curly-newline: off # unpredictable behavior
+    object-curly-spacing: [ error, always ]
+    object-property-newline: off # if object can fit on a 80-char line, all good
+    one-var: [ error, never ]
+    one-var-declaration-per-line: [ error, initializations ]
+    operator-assignment: [ error, always ]
+    operator-linebreak: [ error, before ]
+    padded-blocks: [ error, never ]
+    quote-props: [ error, as-needed ]
+    quotes: [ error , single, { allowTemplateLiterals: true } ]
+    require-jsdoc: off # in favor of docco
+    semi: [ error, always ]
+    semi-spacing: error
+    sort-keys: off # allow logical sorting
+    sort-vars: off # allow logical sorting
+    space-before-blocks: error
+    space-before-function-paren:
+        - error
+        - anonymous: always
+          named: never
+          asyncArrow: always
+    space-in-parens: off # sometimes use 'em, sometimes don't
+    space-infix-ops: error
+    space-unary-ops: error
+    spaced-comment: [ error, always, { markers: [ '/' ] } ]
+    template-tag-spacing: [ error, always ]
+    unicode-bom: [ error, never ]
+    wrap-regex: off # /foo/.test('bar') is clearly not division
+
+    # ECMAScript 6+
+    # Many ES6 features center around cramming logic into as few characters
+    # as possible on a single line, at the expense of readability and clarity.
+    # Discourage/ban those features where possible.
+    arrow-body-style: [ error, never ] # irrelevant cause func-style
+    arrow-parens: error # irrelevant cause func-style
+    arrow-spacing: error # irrelevant cause func-style
+    constructor-super: off # invalid call check is good, but don't require it
+    generator-star-spacing: [ error, { before: true, after: false } ]
+    no-class-assign: error
+    no-confusing-arrow: error # irrelevant cause func-style
+    no-const-assign: error
+    no-dupe-class-members: error
+    no-duplicate-imports: error
+    no-new-symbol: error
+    no-restricted-imports: off # maybe use this in the future
+    no-this-before-super: off # logic may need to be before and/or after super
+    no-useless-computed-key: error
+    no-useless-constructor: error
+    no-useless-rename: error # irrelevant cause force node require/module.export
+    no-var: error
+    object-shorthand: [ error, always ]
+    prefer-arrow-callback: off # irrelevant cause func-style
+    prefer-const: error
+    prefer-destructuring: off # reduces clarity, sometimes dramatically #fuckit
+    prefer-numeric-literals: error
+    prefer-rest-params: error # disallow arguments magic variable
+    prefer-spread: error
+    prefer-template: error
+    require-yield: error
+    rest-spread-spacing: error
+    sort-imports: off # allow logical sorting
+    symbol-description: error
+    template-curly-spacing: [ error, always ]
+    yield-star-spacing: [ error, before ]

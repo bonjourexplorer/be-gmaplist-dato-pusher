@@ -1,0 +1,38 @@
+{
+    "name": "be-gmaplist-dato-pusher",
+    "version": "0.0.0",
+    "description": "Push a parsed Google Maps List to Bonjour Explorer's Dato content repository",
+    "author": "Derek Dunagan (https://github.com/rhombal)",
+    "license": "MIT",
+    "main": "target/cli/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bonjourexplorer/be-gmaplist-dato-pusher.git"
+    },
+    "dependencies": {
+        "chalk": "^2.3.2",
+        "commander": "^2.14.1",
+        "datocms-client": "^0.4.2",
+        "parse-gmaplist": "bonjourexplorer/parse-gmaplist"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-stage-3": "^6.24.1",
+        "eslint": "^4.18.0",
+        "mocha": "^5.0.1",
+        "np": "^2.20.1",
+        "rimraf": "^2.6.2"
+    },
+    "scripts": {
+        "test": "eslint ./source && mocha ./source/index.test.js",
+        "prestart": "npm install --silent",
+        "startXXX": "mocha --inspect-brk --watch ./source/index.test.js",
+        "start": "node --inspect-brk ./bin/parse-gmaplist",
+        "build": "npm run --silent build-cli",
+        "prebuild-cli": "npm install --silent && npm test --silent",
+        "build-cli": "rimraf ./target/npm; babel ./source --out-dir ./target/cli",
+        "rinse": "rimraf ./target ./.tmp ./tmp ./**/.tmp ./**/tmp ./npm-debug.log* ./**/npm-debug.log*",
+        "scrub": "npm run --silent rinse; rimraf ./node_modules"
+    }
+}
