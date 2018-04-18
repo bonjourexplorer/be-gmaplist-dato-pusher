@@ -1,9 +1,10 @@
 env:
+    es6: true
     node: true
     mocha: true
 
 parserOptions:
-    ecmaVersion: 9
+    ecmaVersion: 8
     sourceType: script
 
 rules:
@@ -302,7 +303,7 @@ rules:
     no-var: error
     object-shorthand: [ error, always ]
     prefer-arrow-callback: off # irrelevant cause func-style
-    prefer-const: error
+    prefer-const: warn
     prefer-destructuring: off # reduces clarity, sometimes dramatically #fuckit
     prefer-numeric-literals: error
     prefer-rest-params: error # disallow arguments magic variable

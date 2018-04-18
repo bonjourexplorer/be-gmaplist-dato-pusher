@@ -1,0 +1,92 @@
+#!/usr/bin/env node
+// eslint-disable-next-line max-params
+(function main(PKG, PROCESS, CLI, CHALK, parse_gmaplist, push_places) {
+    CLI.setApp(PKG.name, PKG.version);
+    CLI.enable('version');
+    CLI.parse({
+        key: [ false, 'Airtable API key', 'string' ],
+        list: [ false, 'List slug (e.g. denver) to push places to', 'string' ],
+        }); // eslint-disable-line indent
+    log('');
+    let api_key = CLI.options.key;
+    if (!api_key) {
+        // get from ~/.be-push-places.key
+        api_key = 'keyw9AK6tFtkN9csI';
+    }
+    const { list } = CLI.options;
+    if (!list) {
+        log(
+            '⛔️  Use the --list option to specificy which list to push to',
+            'error',
+            ); // eslint-disable-line indent
+    } else if (0 === CLI.argv.length) {
+        log(
+            '🗺  Parsing Google Maps files in your downloads directory',
+            ); // eslint-disable-line indent
+        const place_list = parse_gmaplist();
+        try_to_push_to_airtable({ api_key, list, place_list });
+    } else {
+        try_to_push_to_airtable({
+            api_key,
+            list,
+            place_list: JSON.parse(CLI.argv[0]),
+            }); // eslint-disable-line indent
+        CLI.argv.length > 1
+            && log(
+                `⚠️  arg0 used, arg1...arg${ CLI.argv.length - 1 } ignored`,
+                'warning',
+                ) // eslint-disable-line indent
+            ; // eslint-disable-line indent
+    }
+
+    // -----------
+
+    function try_to_push_to_airtable(params) {
+        log('🖇  Connecting to Airtable');
+        push_places(params, log).then(exit);
+    }
+
+    function exit(raw_message) {
+        if (raw_message instanceof Error) {
+            log(raw_message.message, 'error');
+            CLI.exit(1);
+        } else {
+            log(raw_message, 'success');
+            CLI.exit(0);
+        }
+    }
+
+    // -----------
+
+    function log(message, level = 'info') {
+        switch (level) {
+            case 'info':
+                return write_to_stderr(CHALK.cyan(message));
+            case 'success':
+                return write_to_stderr(CHALK.green(message));
+            case 'warn':
+            case 'warning':
+                return write_to_stderr(CHALK.yellow(message));
+            case 'error':
+                return write_to_stderr(CHALK.red(message));
+            case 'verbose':
+                return write_to_stderr(CHALK.gray(message));
+        }
+        return write_to_stderr(message);
+    }
+
+    /* eslint-disable no-unused-vars */
+    function write_to_stdout(text) {
+        PROCESS.stdout.write(`${ text }\n`);
+    }
+    function write_to_stderr(text) {
+        PROCESS.stderr.write(`${ text }\n`);
+    }
+}(
+    require('../package.json'),
+    require('process'),
+    require('cli'),
+    require('chalk'),
+    require('parse-gmaplist'),
+    require('../source/index.js'),
+));
