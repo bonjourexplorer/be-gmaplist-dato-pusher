@@ -10,8 +10,7 @@
     log('');
     let api_key = CLI.options.key;
     if (!api_key) {
-        // get from ~/.be-push-places.key
-        api_key = 'keyw9AK6tFtkN9csI';
+        // TODO: get from ~/.be-push-places.key
     }
     const { list } = CLI.options;
     if (!list) {
