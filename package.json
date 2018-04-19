@@ -1,8 +1,8 @@
 {
     "name": "be-gmaplist-pusher",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Push a parsed Google Maps List to Bonjour Explorer's content repository",
-    "author": "Derek Dunagan (https://github.com/rhombal)",
+    "author": "Derek Dunagan (https://github.com/d11n)",
     "license": "MIT",
     "main": "target/node/index.js",
     "repository": {
