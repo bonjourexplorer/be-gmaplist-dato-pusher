@@ -1,0 +1,3 @@
+- move base id to cli option (and clone, so new id)
+- pull down only the remote places included in place_list
+- remove place from remote list, if not in place_list

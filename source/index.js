@@ -60,7 +60,7 @@
                 if (exception) {
                     throw exception;
                 }
-                log && log('📍  Processing existing places');
+                log && log('📍 Processing existing places');
                 for (const place of remote_place_list) {
                     const { title, google_place_id } = place.fields;
                     log && log(`   ${ title }`, 'verbose');
@@ -115,7 +115,7 @@
                     ); // eslint-disable-line indent
                 log && log(`   ${ place.get('title') }`, 'verbose');
                 if (processed_place_list.length === place_list.length) {
-                    return resolve(`🏁  Finished publishing!`);
+                    return resolve(`🏁 Finished publishing!`);
                 }
                 return true;
             }
