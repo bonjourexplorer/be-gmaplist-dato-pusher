@@ -5,43 +5,29 @@
     CLI.enable('version');
     CLI.parse({
         key: [ false, 'Airtable API key', 'string' ],
-        list: [ false, 'List slug (e.g. denver) to push places to', 'string' ],
+        list: [ false, 'List slug (e.g. paris) to push places to', 'string' ],
         verbose: [ false, 'Maximum verbosity' ],
         }); // eslint-disable-line indent
     log('');
-    const api_key = CLI.options.key;
-    if (!api_key) {
-        // maybe get from ~/.be-push-places.key or similar
-    }
+    const api_key = CLI.options.key; // maybe fallback to ~/.be-push-places.key
     const { list } = CLI.options;
     if (!list) {
-        log(
-            '⛔️  Use the --list option to specificy which list to push to',
-            'error',
-            ); // eslint-disable-line indent
+        log('⛔️  Use the --list option to specificy which list to push to', 'error'); // eslint-disable-line max-len
     } else if (0 === CLI.argv.length) {
-        log(
-            '🗺  Parsing Google Maps files in your downloads directory',
-            ); // eslint-disable-line indent
+        log('🗺  Parsing Google Maps files in your downloads directory'); // eslint-disable-line max-len
         const place_list = parse_gmaplist();
-        try_to_push_to_airtable({ api_key, list, place_list });
+        push_to_airtable({ api_key, list, place_list });
     } else {
-        try_to_push_to_airtable({
-            api_key,
-            list,
-            place_list: JSON.parse(CLI.argv[0]),
-            }); // eslint-disable-line indent
+        const place_list = JSON.parse(CLI.argv[0]);
+        push_to_airtable({ api_key, list, place_list });
         CLI.argv.length > 1
-            && log(
-                `⚠️  arg0 used, arg1...arg${ CLI.argv.length - 1 } ignored`,
-                'warning',
-                ) // eslint-disable-line indent
+            && log(`⚠️  arg0 used, arg1...arg${ CLI.argv.length - 1 } ignored`, 'warning') // eslint-disable-line max-len
             ; // eslint-disable-line indent
     }
 
     // -----------
 
-    function try_to_push_to_airtable(params) {
+    function push_to_airtable(params) {
         log('🖇  Connecting to Airtable');
         push_places(params, log).then(exit);
     }

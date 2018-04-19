@@ -1,4 +1,3 @@
-/* eslint-disable no-sync */
 // eslint-disable-next-line max-params
 (function main(Airtable, CONTENT_BASE_ID) {
     const timeout = 5; // minutes
@@ -120,9 +119,7 @@
                 return true;
             }
             function bail() {
-                return resolve(new Error(
-                    `😞  Timed out after ${ timeout } minutes`,
-                    )); // eslint-disable-line indent
+                return resolve(new Error(`😞  Timed out after ${ timeout }min`));
             }
         }
     }
