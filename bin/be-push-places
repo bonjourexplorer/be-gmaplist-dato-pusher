@@ -6,11 +6,12 @@
     CLI.parse({
         key: [ false, 'Airtable API key', 'string' ],
         list: [ false, 'List slug (e.g. denver) to push places to', 'string' ],
+        verbose: [ false, 'Maximum verbosity' ],
         }); // eslint-disable-line indent
     log('');
-    let api_key = CLI.options.key;
+    const api_key = CLI.options.key;
     if (!api_key) {
-        // TODO: get from ~/.be-push-places.key
+        // maybe get from ~/.be-push-places.key or similar
     }
     const { list } = CLI.options;
     if (!list) {
@@ -69,7 +70,9 @@
             case 'error':
                 return write_to_stderr(CHALK.red(message));
             case 'verbose':
-                return write_to_stderr(CHALK.gray(message));
+                return CLI.options.verbose
+                    && write_to_stderr(CHALK.gray(message))
+                    ; // eslint-disable-line indent
         }
         return write_to_stderr(message);
     }
