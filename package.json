@@ -10,17 +10,17 @@
         "url": "git+https://github.com/bonjourexplorer/be-gmaplist-pusher.git"
     },
     "dependencies": {
-        "airtable": "^0.5.3",
-        "chalk": "^2.4.0",
+        "airtable": "^0.5.6",
+        "chalk": "^2.4.1",
         "cli": "^1.0.1",
         "parse-gmaplist": "github:bonjourexplorer/parse-gmaplist"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
+        "babel-preset-env": "^1.7.0",
         "babel-preset-stage-3": "^6.24.1",
         "eslint": "^4.19.1",
-        "mocha": "^5.1.0",
+        "mocha": "^5.2.0",
         "np": "^2.20.1",
         "rimraf": "^2.6.2"
     },
@@ -28,7 +28,7 @@
         "test": "eslint ./source && mocha ./source/index.test.js",
         "prestart": "npm install --silent",
         "startXXX": "mocha --inspect-brk --watch ./source/index.test.js",
-        "start": "node --inspect-brk ./bin/be-push-places --list denver",
+        "start": "node --inspect-brk ./bin/be-push-places --verbose --list atlanta --key keyI6u9lgg8uRVuVw",
         "build": "npm run --silent build-cli",
         "prebuild-cli": "npm install --silent && npm test --silent",
         "build-cli": "rimraf ./target/npm; babel ./source --out-dir ./target/node",
